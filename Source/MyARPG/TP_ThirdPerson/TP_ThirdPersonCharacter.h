@@ -54,4 +54,16 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+protected:
+	UFUNCTION(BlueprintImplementableEvent, Category = Character)
+	void OnDamaged(float Damage, const FHitResult& HitInfo, ATP_ThirdPersonCharacter* InstigatedCharacter, AActor* DamageCauser);
+
+public:
+	UFUNCTION(Blueprintcallable, Category = Character)
+	//virtual void HandleDamage(float Damage,const FHitResult& HitInfo, class AController* InstigatedBy, AActor* DamageCauser)
+	virtual void HandleDamage(float Damage,const FHitResult& HitInfo, ATP_ThirdPersonCharacter* InstigatedCharacter, AActor* DamageCauser)
+	{
+		OnDamaged(Damage, HitInfo, InstigatedCharacter, DamageCauser);
+	}
 };
